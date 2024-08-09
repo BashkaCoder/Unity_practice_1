@@ -13,7 +13,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     [SerializeField] private Slider _slider; 
     
     [SerializeField] private int _loadingDuration; // seconds
-    [FormerlySerializedAs("_loadingDelay")] [SerializeField] private int _loadingPeriod; // milliseconds
+    [SerializeField] private int _loadingPeriod; // milliseconds
 
     private readonly int _clicksThreshold = 3;
     private int _clicksDone = 0;
