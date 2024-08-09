@@ -1,18 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MainMenuEntryPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private WebLoader _webLoader;
+    [SerializeField] private ResourceLoader _resourceLoader;
+    [SerializeField] private NextSceneLoader _sceneLoader;
+
+    public async void Start()
     {
-        
+        await Boot();
     }
 
-    // Update is called once per frame
-    void Update()
+    private async Task Boot()
     {
-        
+        var tasks = new List<Task>(3);
+        tasks.Add(_webLoader.LoadImage());
+        tasks.Add(_resourceLoader.LoadImage());
+        tasks.Add(_sceneLoader.LoadNextScene());
+
+        await Task.WhenAll(tasks);
     }
 }
