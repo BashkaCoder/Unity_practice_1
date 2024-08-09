@@ -33,6 +33,5 @@ public class NextSceneLoader : MonoBehaviour
             if (operation.progress >= 0.9f && shouldLoad)
                 operation.allowSceneActivation = true;
         }
-        
     }
 }
