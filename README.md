@@ -1,2 +1,2 @@
 # Unity_practice_1
-Bootstrap and async stuff
+Practice dedicated to learning bootstrap and async stuff in Unity.
