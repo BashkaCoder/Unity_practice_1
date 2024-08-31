@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class MainMenuEntryPoint : MonoBehaviour
@@ -8,18 +6,15 @@ public class MainMenuEntryPoint : MonoBehaviour
     [SerializeField] private ResourceLoader _resourceLoader;
     [SerializeField] private NextSceneLoader _sceneLoader;
 
-    public async void Start()
+    private void Start()
     {
-        await Boot();
+        Boot();
     }
 
-    private async Task Boot()
+    private void Boot()
     {
-        var tasks = new List<Task>(3);
-        tasks.Add(_webLoader.LoadImage());
-        tasks.Add(_resourceLoader.LoadImage());
-        tasks.Add(_sceneLoader.LoadNextScene());
-
-        await Task.WhenAll(tasks);
+        _webLoader.LoadImage();
+        _resourceLoader.LoadImage();
+        _sceneLoader.LoadNextScene();
     }
 }

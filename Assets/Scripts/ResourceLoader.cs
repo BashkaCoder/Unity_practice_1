@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 public class ResourceLoader : MonoBehaviour
 {
@@ -15,23 +16,22 @@ public class ResourceLoader : MonoBehaviour
         _slider.value = 0;
     }
 
-    public async Task LoadImage()
+    public async UniTask LoadImage()
     {
-        await LoadImage("8k_moon");
+        await LoadImageAsync("8k_moon", this.destroyCancellationToken);
     }
-    
-    private async Task LoadImage(string url)
+
+    private async UniTask LoadImageAsync(string url, CancellationToken ct)
     {
         var request = Resources.LoadAsync<Sprite>(url);
         while (!request.isDone)
         {
-            await Task.Yield();
+            await UniTask.Yield(ct);
             _slider.value = request.progress;
             _title.text = String.Format("Загрузка(Resources): {0:f2}/100%", request.progress * 100f);
         }
-        
+
         _slider.value = 1f;
-        
-        _image.sprite = (Sprite) request.asset;
+        _image.sprite = (Sprite)request.asset;
     }
 }

@@ -1,38 +1,52 @@
+using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class NextSceneLoader : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private Button _button;
-
-    private bool shouldLoad;
+    [SerializeField] private TMP_Text _title;
+    
+    private bool _shouldLoad;
+    private AsyncOperation _loadSceneOperation;
     
     private void Start()
     {
         _slider.value = 0;
+        _title.text = "Некст сцена загружается";
         _button.interactable = false;
-        _button.onClick.AddListener(() => shouldLoad = true);
+        _button.onClick.AddListener(() => _loadSceneOperation.allowSceneActivation = true);
     }
 
-    public async Task LoadNextScene()
+    public async UniTask LoadNextScene()
     {
-        var operation = SceneManager.LoadSceneAsync(1);
-        operation.allowSceneActivation = false;
-
-        while (!operation.isDone)
+        await LoadNextSceneAsync(this.GetCancellationTokenOnDestroy());
+    }
+    
+    private async UniTask LoadNextSceneAsync(CancellationToken ct)
+    {
+        try
         {
-            await Task.Yield();
-            _slider.value = operation.progress;
+            _loadSceneOperation = SceneManager.LoadSceneAsync(1);
+            _loadSceneOperation.allowSceneActivation = false;
 
-            if (operation.progress >= 0.9f)
-                _button.interactable = true;
-            
-            if (operation.progress >= 0.9f && shouldLoad)
-                operation.allowSceneActivation = true;
+            while (_loadSceneOperation.progress < 0.9f)
+            { 
+                await UniTask.Yield(ct);
+                _slider.value = _loadSceneOperation.progress / 0.9f;
+            }
+            _title.text = "Некст сцена загружена";
+            _button.interactable = true;
         }
-        
+        catch (Exception ex)
+        {
+            Debug.LogError(ex.Message);
+            throw;
+        }
     }
 }
