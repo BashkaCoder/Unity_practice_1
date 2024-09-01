@@ -3,13 +3,25 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AssetLoaderView : MonoBehaviour
+public class ResourceLoaderView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _title;
     [SerializeField] private Slider _progressbar;
     [SerializeField] private Image _image;
 
-    private readonly WebLoader _webLoader = new();
+    private readonly ResourceLoader _resourceLoader = new();
+    
+    private void OnEnable()
+    {
+        _resourceLoader.OnProgressChanged += UpdateProgress;
+        _resourceLoader.OnLoadingCompleted += SetSprite;
+    }
+    
+    private void OnDisable()
+    {
+        _resourceLoader.OnProgressChanged -= UpdateProgress;
+        _resourceLoader.OnLoadingCompleted -= SetSprite;
+    }
     
     public void Initialize()
     {
@@ -19,7 +31,7 @@ public class AssetLoaderView : MonoBehaviour
 
     public void LoadImage()
     {
-        _webLoader.LoadImage(this.GetCancellationTokenOnDestroy());
+        _resourceLoader.LoadImage(this.GetCancellationTokenOnDestroy());
     }
     
     private void UpdateProgress(float progressBarValue)
@@ -33,18 +45,5 @@ public class AssetLoaderView : MonoBehaviour
         _title.text = "Загрузка(Web): 100/100%";
         _progressbar.value = 1f;
         _image.sprite = sprite;
-    }
-    
-    private void OnEnable()
-    {
-        _webLoader.OnProgressChanged += UpdateProgress;
-        _webLoader.OnLoadingCompleted += SetSprite;
-
-    }
-    
-    private void OnDisable()
-    {
-        _webLoader.OnProgressChanged -= UpdateProgress;
-        _webLoader.OnLoadingCompleted -= SetSprite;
     }
 }

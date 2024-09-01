@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MainMenuEntryPoint : MonoBehaviour
 {
-    [SerializeField] private AssetLoaderView _webLoaderView;
-    [SerializeField] private ResourceLoader _resourceLoader;
-    [SerializeField] private NextSceneLoader _sceneLoader;
+    [SerializeField] private WebLoaderView _webLoaderView;
+    [SerializeField] private ResourceLoaderView _resourceLoaderView;
+    [SerializeField] private NextSceneLoaderView _sceneLoaderView;
 
     private void Start()
     {
@@ -15,7 +15,9 @@ public class MainMenuEntryPoint : MonoBehaviour
     {
         _webLoaderView.Initialize();
         _webLoaderView.LoadImage();
-        _resourceLoader.LoadImage();
-        _sceneLoader.LoadNextScene();
+        _resourceLoaderView.Initialize();
+        _resourceLoaderView.LoadImage();
+        _sceneLoaderView.Initialize();
+        _sceneLoaderView.LoadNextScene();
     }
 }

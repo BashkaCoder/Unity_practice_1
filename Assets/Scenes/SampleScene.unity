@@ -658,12 +658,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 268747109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15dbee3c6f515b546bad1c72a74ffdc8, type: 3}
+  m_Script: {fileID: 11500000, guid: c3b2843c839bfce40b65a6c9087278f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 1036546348}
-  _button: {fileID: 119568999}
   _title: {fileID: 35118706}
+  _progressbar: {fileID: 1036546348}
+  _button: {fileID: 119568999}
 --- !u!1 &290155990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,8 +1309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _webLoaderView: {fileID: 294881673}
-  _resourceLoader: {fileID: 1357314481}
-  _sceneLoader: {fileID: 268747111}
+  _resourceLoaderView: {fileID: 1357314481}
+  _sceneLoaderView: {fileID: 268747111}
 --- !u!4 &939073256
 Transform:
   m_ObjectHideFlags: 0
@@ -2148,12 +2148,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1357314479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22f34f0a3f34a639ddee077a2417f48, type: 3}
+  m_Script: {fileID: 11500000, guid: d2881fca3aa8e5d4386c515d0c96035e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 1005538025}
-  _slider: {fileID: 27116443}
   _title: {fileID: 1412483686}
+  _progressbar: {fileID: 27116443}
+  _image: {fileID: 1005538025}
 --- !u!1 &1380264754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,6 +2557,10 @@ PrefabInstance:
     - target: {fileID: 7202391827286840034, guid: 0b1ca2de47e06cc4993607a4c9477c86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402350623284941727, guid: 0b1ca2de47e06cc4993607a4c9477c86, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
