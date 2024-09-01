@@ -25,7 +25,7 @@ public class NextSceneLoader : MonoBehaviour
 
     public async UniTask LoadNextScene()
     {
-        await LoadNextSceneAsync(this.GetCancellationTokenOnDestroy());
+        await LoadNextSceneAsync(destroyCancellationToken);
     }
     
     private async UniTask LoadNextSceneAsync(CancellationToken ct)
@@ -34,12 +34,14 @@ public class NextSceneLoader : MonoBehaviour
         {
             _loadSceneOperation = SceneManager.LoadSceneAsync(1);
             _loadSceneOperation.allowSceneActivation = false;
-
+            
             while (_loadSceneOperation.progress < 0.9f)
-            { 
-                await UniTask.Yield(ct);
+            {
                 _slider.value = _loadSceneOperation.progress / 0.9f;
+                await UniTask.Yield(ct);
             }
+            
+            _slider.value = 1f;
             _title.text = "Некст сцена загружена";
             _button.interactable = true;
         }

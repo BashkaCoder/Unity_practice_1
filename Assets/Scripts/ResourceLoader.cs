@@ -32,6 +32,6 @@ public class ResourceLoader : MonoBehaviour
         }
 
         _slider.value = 1f;
-        _image.sprite = (Sprite)request.asset;
+        _image.sprite = (Sprite) request.asset;
     }
 }

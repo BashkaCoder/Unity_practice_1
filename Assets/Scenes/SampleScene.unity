@@ -801,12 +801,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 294881671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081f62fad4054f0438df1c964ee5b419, type: 3}
+  m_Script: {fileID: 11500000, guid: b1722b6e8f203784298c6ca27a91620d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 1289738970}
-  _slider: {fileID: 290155992}
   _title: {fileID: 885009230}
+  _progressbar: {fileID: 290155992}
+  _image: {fileID: 1289738970}
 --- !u!1 &431023228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4f6c044fe783348b94148350077ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _webLoader: {fileID: 294881673}
+  _webLoaderView: {fileID: 294881673}
   _resourceLoader: {fileID: 1357314481}
   _sceneLoader: {fileID: 268747111}
 --- !u!4 &939073256
