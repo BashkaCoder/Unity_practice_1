@@ -21,7 +21,8 @@ public class LoadingOperation
     private async UniTask ImitateTextLoading(int durationS, int periodMS, CancellationToken ct)
     {
         int elapsedTimeMS = 0;
-        while (elapsedTimeMS < durationS * 1000)
+        int waitTimeMS = durationS * 1000;
+        while (elapsedTimeMS < waitTimeMS)
         {
             if (ct.IsCancellationRequested)
             {
@@ -29,7 +30,7 @@ public class LoadingOperation
                 return;
             }
             elapsedTimeMS += periodMS;
-            OnOperationProgress?.Invoke(elapsedTimeMS / (durationS * 1000f));
+            OnOperationProgress?.Invoke((float) elapsedTimeMS / waitTimeMS);
             await UniTask.Delay(periodMS);
         }
         OnOperationFinished?.Invoke();
